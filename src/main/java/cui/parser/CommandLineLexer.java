@@ -49,7 +49,7 @@ public class CommandLineLexer {
 				continue;
 			}
 			
-			if (str.equals("&") ||str.equals("|") ) {
+			if (str.equals("&") || str.equals("|")) {
 				tmp = str;
 				continue;
 			}
@@ -67,12 +67,12 @@ public class CommandLineLexer {
 		if (tmp.equals("|") && !str.equals("|")) return true;
 		return false;
 	}
-
+	
 	private boolean isOR(String tmp, String str) {
 		if (tmp.equals("|") && str.equals("|")) return true;
 		return false;
 	}
-
+	
 	private boolean isAndAnd(String tmp, String str) {
 		if (tmp.equals("&") && str.equals("&")) return true;
 		return false;
