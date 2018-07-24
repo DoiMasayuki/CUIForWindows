@@ -2,6 +2,10 @@ package cui;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import cui.parser.CommandLineLexer;
+import cui.parser.Token;
 
 public class WindowsSubsystemForLinux {
 	
@@ -14,9 +18,35 @@ public class WindowsSubsystemForLinux {
 	}
 	
 	private String convertCommandForLinux(String command) {
-		List<String> commands = this.splitCommandPipe(command);
-		return this.convertCommandPerPile(commands);
+		System.out.println("----------");
+		System.out.println(command);
+		System.out.println("----------");
+		CommandLineLexer lexer = new CommandLineLexer();
+//		List<String> tokens = this.splitSpace(command);
+		StringBuilder commandLine = new StringBuilder();
+		StringBuilder cmd = new StringBuilder();
+		for (Token token : lexer.lexicalize(command)) {
+			if (token.isCommandSpliteLiteral()) {
+				commandLine.append(cmd.toString());
+				cmd = new StringBuilder();
+				continue;
+			}
+			commandLine.append(token.toString());
+			
+			// if (token == null) continue;
+			// if (this.isCommandSplitter(token)) {
+			
+		}
 		
+//		return this.convertCommandPerPile(commands);
+		return commandLine.toString();
+		
+	}
+	
+	private boolean isCommandSplitter(String token) {
+		Pattern p = Pattern.compile("\\|\\||\\||&&|;");
+		// if (token)
+		return false;
 	}
 	
 	private String convertCommandPerPile(List<String> commands) {
@@ -41,14 +71,14 @@ public class WindowsSubsystemForLinux {
 		}
 		
 		String newCmd = new String();
-		List<String> string = this.splitCommandSpace(cmd);
+		List<String> string = this.splitSpace(cmd);
 		for (int i = 0; i < string.size(); i++) {
 			String str = string.get(i);
 			if (i == 0 && str.equals(WSL)) {
 				continue;
 			}
 			if (isIncludeDrivePath(str)) {
-				str = "/mnt/" + str.toLowerCase().replace(":", "");
+				str = "/mnt/" + Character.toLowerCase(str.charAt(0)) + str.substring(2);
 			}
 			newCmd += str;
 			if (i == string.size() - 1) break;
@@ -77,11 +107,16 @@ public class WindowsSubsystemForLinux {
 		return cmd;
 	}
 	
-	private List<String> splitCommandPipe(String command) {
-		return Arrays.asList(command.split("\\|"));
+	private List<String> splitCommand(String command) {
+		Pattern p = Pattern.compile("\\|\\||\\||&&|;");
+		for (String str : p.split(command)) {
+			System.out.println("split : " + str);
+		}
+		
+		return Arrays.asList(p.split(command));
 	}
 	
-	private List<String> splitCommandSpace(String command) {
+	private List<String> splitSpace(String command) {
 		return Arrays.asList(command.split(" "));
 	}
 	
