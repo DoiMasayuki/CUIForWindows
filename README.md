@@ -1,13 +1,13 @@
 # CUIForWindows
 CUI command for Windows. When linux command inputs, this program execute the linux command **without `wsl`**.
 
-#Example
-##Input
+# Example
+## Input
 Enviroment : Windows10
 ```
 find ./src | xargs grep main
 ```
-##Output
+## Output
 ```
 ./src/main/java/cui/CUI.java:	public static void main(String[] args) {
 ```
