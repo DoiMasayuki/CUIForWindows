@@ -38,7 +38,6 @@ public class Token {
 	}
 	
 	public boolean isCommandSpliteLiteral() {
-		if (this.isSemicolonLiteral()) return true;
 		if (this.isANDLiteral()) return true;
 		if (this.isORLiteral()) return true;
 		if (this.isPipeLiteral()) return true;

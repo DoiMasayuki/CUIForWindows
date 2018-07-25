@@ -22,8 +22,6 @@ public class WindowsSubsystemForLinux {
 		StringBuilder cmd = new StringBuilder();
 		for (Token token : lexer.lexicalize(command)) {
 			if (token.isCommandSpliteLiteral()) {
-				commandLine.append(cmd.toString());
-				if (token.isSemicolonLiteral()) commandLine.append(" " + Token.SEMICOLON + " ");
 				if (token.isANDLiteral()) commandLine.append(" " + Token.AND + " ");
 				if (token.isORLiteral()) commandLine.append(" " + Token.OR + " ");
 				if (token.isPipeLiteral()) commandLine.append(" " + Token.PIPE + " ");

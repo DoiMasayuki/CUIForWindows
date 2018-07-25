@@ -80,7 +80,7 @@ public class WindowsSubsystemForLinuxTest {
 			IllegalArgumentException, InvocationTargetException {
 		Method method = WindowsSubsystemForLinux.class.getDeclaredMethod("convertCommandForLinux", String.class);
 		method.setAccessible(true);
-		assertEquals((String) method.invoke(wsl, "cd .. ; ls"), "wsl cd .. ; wsl ls");
+		assertEquals((String) method.invoke(wsl, "cd .. ; ls"), "wsl cd .. ; ls");
 	}
 
 	
