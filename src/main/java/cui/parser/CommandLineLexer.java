@@ -11,13 +11,6 @@ public class CommandLineLexer {
 		String tmp = new String();
 		for (String str : command.split("")) {
 			
-			if (str.equals(Token.SEMICOLON)) {
-				appendToken(token);
-				appendToken(Token.SEMICOLON);
-				token = new String();
-				continue;
-			}
-			
 			if (isAndAnd(tmp, str)) {
 				appendToken(token);
 				appendToken(Token.AND);

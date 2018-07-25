@@ -18,9 +18,7 @@ public class CommandLineLexerTest {
 	public void testLexicalize2() {
 		CommandLineLexer lexer = new CommandLineLexer();
 		String command = "echo a ; grep a";
-		assertEquals("echo a", lexer.lexicalize(command).get(0).toString());
-		assertEquals(";", lexer.lexicalize(command).get(1).toString());
-		assertEquals("grep a", lexer.lexicalize(command).get(2).toString());
+		assertEquals("echo a ; grep a", lexer.lexicalize(command).get(0).toString());
 	}
 	
 	@Test
