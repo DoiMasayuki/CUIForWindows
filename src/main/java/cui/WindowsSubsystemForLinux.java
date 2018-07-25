@@ -50,7 +50,7 @@ public class WindowsSubsystemForLinux {
 				continue;
 			}
 			if (isIncludeDrivePath(str)) {
-				str = "/mnt/" + Character.toLowerCase(str.charAt(0)) + str.replace(":", "\\").substring(1);
+				str = "/mnt/" + Character.toLowerCase(str.charAt(0)) + str.replace(":", "").substring(1);
 			}
 			newCmd += str;
 			if (i == string.size() - 1) break;

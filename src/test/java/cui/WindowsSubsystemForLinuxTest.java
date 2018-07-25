@@ -45,7 +45,7 @@ public class WindowsSubsystemForLinuxTest {
 			IllegalArgumentException, InvocationTargetException {
 		Method method = WindowsSubsystemForLinux.class.getDeclaredMethod("convertCommandForLinux", String.class);
 		method.setAccessible(true);
-		
+
 		assertEquals((String) method.invoke(wsl, "ls D:\\test"), "wsl ls /mnt/d/test");
 	}
 	
@@ -90,6 +90,14 @@ public class WindowsSubsystemForLinuxTest {
 		Method method = WindowsSubsystemForLinux.class.getDeclaredMethod("convertCommandForLinux", String.class);
 		method.setAccessible(true);
 		assertEquals((String) method.invoke(wsl, "cd .. || ls"), "wsl cd .. || wsl ls");
+	}
+	
+	@Test
+	public void convertDriveCommandTest8() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		Method method = WindowsSubsystemForLinux.class.getDeclaredMethod("convertCommandForLinux", String.class);
+		method.setAccessible(true);
+		assertEquals((String) method.invoke(wsl, "cd D:\\test\\te"), "wsl cd /mnt/d/test/te");
 	}
 
 }

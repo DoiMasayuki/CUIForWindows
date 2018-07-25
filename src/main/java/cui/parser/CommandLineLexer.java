@@ -7,18 +7,10 @@ public class CommandLineLexer {
 	private ArrayList<Token> tokens = new ArrayList<>();
 	
 	public ArrayList<Token> lexicalize(final String command) {
-		boolean tmpEscape = false;
 		String token = new String();
 		String tmp = new String();
 		for (String str : command.split("")) {
-			if (str.equals("\\")) {
-				tmpEscape = true;
-				continue;
-			}
-			if (tmpEscape) {
-				System.out.println("aa");
-			}
-			tmpEscape = false;
+			
 			if (str.equals(Token.SEMICOLON)) {
 				appendToken(token);
 				appendToken(Token.SEMICOLON);
@@ -33,7 +25,6 @@ public class CommandLineLexer {
 				tmp = new String();
 				continue;
 			}
-			
 			if (isOR(tmp, str)) {
 				appendToken(token);
 				appendToken(Token.OR);
